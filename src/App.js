@@ -1,12 +1,15 @@
-// ✅ Added state to track comment edits
+// Added state to track comment edits
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import TrueFocus from './TrueFocus';
 import ProfileCard from './ProfileCard';
 import ScrollVelocity from './ScrollVelocity';
 import * as XLSX from 'xlsx'; //  Excel export
+import { useNavigate } from 'react-router-dom';
+
 const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
-function App() {
+function App() 
+{
   const [items, setItems] = useState([]);
   const [allItems, setAllItems] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
@@ -14,6 +17,7 @@ function App() {
   const [searching, setSearching] = useState(false);
   const [editedComments, setEditedComments] = useState({});
   const [showAddForm, setShowAddForm] = useState(false);
+  const navigate = useNavigate();
   const [newItem, setNewItem] = useState({
     id: '',
     name: '',
@@ -24,6 +28,26 @@ function App() {
   });
 
   const velocity = 40;
+  // NEW: Handles image click for only 6 serial-tracked items
+const handleImageClick = (itemId) => {
+  const itemsWithSerials = [
+    'L01',
+    'monitor',
+    'pc',
+    'L02',
+    'extreme-network-big',
+    'extreme-network-small'
+  ];
+  if (itemsWithSerials.includes(itemId)) {
+    console.log("➡️ Navigating to /serials/" + itemId); // DEBUG
+    navigate(`/serials/${itemId}`);
+  }else {
+    console.log("❌ Not a serial-tracked item"); // DEBUG
+  }
+};
+
+
+
   useEffect(() => {
     fetch(`${BASE_URL}/api/items`)
       .then(res => res.json())
@@ -151,7 +175,21 @@ function App() {
           {items.map(item => (
             <div key={item.id} style={{ border: '1px solid #ccc', borderRadius: '10px', padding: '15px', width: '250px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', backgroundColor: darkMode ? '#2b2b2b' : 'white', color: darkMode ? '#fff' : '#000', position: 'relative' }}>
               <div>
-                <img src={item.imageUrl || 'https://via.placeholder.com/250x150'} alt={item.name} style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '5px', marginBottom: '10px' }} />
+                {/*<img src={item.imageUrl || 'https://via.placeholder.com/250x150'} alt={item.name} style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '5px', marginBottom: '10px' }} /> */}
+
+                 <img
+  src={item.imageUrl || 'https://via.placeholder.com/250x150'}
+  alt={item.name}
+  onClick={() => handleImageClick(item.id)}
+  style={{
+    width: '100%',
+    height: '150px',
+    objectFit: 'cover',
+    borderRadius: '5px',
+    marginBottom: '10px',
+    cursor: 'pointer' 
+  }}
+/> 
                 <h3>{item.name}</h3>
                 <p><strong>Model:</strong> {item.model}</p>
                 <p><strong>Quantity:</strong> {item.quantity}</p>

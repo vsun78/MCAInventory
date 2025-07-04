@@ -1,9 +1,11 @@
+// Main.js
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Login from './Login';
 import App from './App';
+import SerialNumberPage from './SerialNumberPage';
 
-// ✅ Create wrapper to allow useLocation() outside <Router>
+// This wraps Main so we can use useLocation
 function MainWrapper() {
   return (
     <Router>
@@ -16,7 +18,7 @@ function Main() {
   const [authenticated, setAuthenticated] = useState(false);
   const location = useLocation();
 
-  console.log("✅ Main rendering, auth =", authenticated);
+  console.log("🧠 Main.js loaded");
   console.log("📍 Current path:", location.pathname);
 
   const ProtectedRoute = ({ children }) => {
@@ -35,9 +37,18 @@ function Main() {
           </ProtectedRoute>
         }
       />
+      <Route 
+  path="/serials/:itemId" 
+  element={
+    <ProtectedRoute>
+      <SerialNumberPage />
+    </ProtectedRoute>
+  } 
+/>
+
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }
 
-export default MainWrapper;
+export default MainWrapper; // This is what index.js imports
