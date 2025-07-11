@@ -7,6 +7,7 @@ import ScrollVelocity from './ScrollVelocity';
 import * as XLSX from 'xlsx'; //  Excel export
 import { useNavigate } from 'react-router-dom';
 
+
 const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 function App() 
 {
@@ -213,14 +214,28 @@ const handleImageClick = (itemId) => {
         <div style={{ margin: '60px 0' }}>
           <ScrollVelocity texts={['Built With The Right Mix', 'Meet Our Team']} velocity={velocity} className="custom-scroll-text" />
         </div>
+
         {/* Profile Cards */}
-        <div style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '30px' }}>
-          <ProfileCard name="Victor Sun" title="IT Intern" handle="victor.sun@mcasphalt.com" status="Online" contactText="Contact Me" avatarUrl="/VictorAvatar.png" showUserInfo={true} enableTilt={true} onContactClick={() => console.log('Contact clicked')} />
-          <ProfileCard name="Balasubramaniam Balamugunthan" title="Technical Support Analyst" handle="balab@colasiss.com" status="Online" contactText="Contact Me" avatarUrl="/BalaAvatar.jpg" showUserInfo={true} enableTilt={true} onContactClick={() => console.log('Contact clicked')} />
+        <div onClick={() => navigate('/team')} style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '30px' }}>
+          <ProfileCard
+            name="McAsphalt IT"
+            title="Elevate Customer Service Through Advanced Technology"
+            handle="mcasupport@mcasphalt.com"
+            status="Online"
+            contactText="Contact Us"
+            avatarUrl="/MCAteam1.png"
+            showUserInfo={true}
+            enableTilt={true}
+            onClick={() => navigate('/team')} // Custom click handler
+          />
+          
+          
+          {/*<ProfileCard name="Balasubramaniam Balamugunthan" title="Technical Support Analyst" handle="balab@colasiss.com" status="Online" contactText="Contact Me" avatarUrl="/BalaAvatar.jpg" showUserInfo={true} enableTilt={true} onContactClick={() => console.log('Contact clicked')} />
           <ProfileCard name="Jennifer Su Cao" title="IT Service Desk Assitant" handle="jennifer.sucao@mcasphalt.com" status="Online" contactText="Contact Me" avatarUrl="/JenPFP.jpg" showUserInfo={true} enableTilt={true} onContactClick={() => console.log('Contact clicked')} />
           <ProfileCard name="Ryan Duncan" title="Technical Support Analyst" handle="rduncan@colasiss.com" status="Online" contactText="Contact Me" avatarUrl="/RyanPFP.jpg" showUserInfo={true} enableTilt={true} onContactClick={() => console.log('Contact clicked')} />
           <ProfileCard name="Angel Yang" title="IT Service Desk Assitant" handle="angel.yang@mcasphalt.com" status="Online" contactText="Contact Me" avatarUrl="/AngelPFP.jpg" showUserInfo={true} enableTilt={true} onContactClick={() => console.log('Contact clicked')} />
-        </div>
+          */}
+          </div>
       </div>
     </div>
   );

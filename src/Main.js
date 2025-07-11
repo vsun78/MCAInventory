@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'r
 import Login from './Login';
 import App from './App';
 import SerialNumberPage from './SerialNumberPage';
+import TeamPage from './TeamPage'; 
 
 // This wraps Main so we can use useLocation
 function MainWrapper() {
@@ -29,6 +30,7 @@ function Main() {
   return (
     <Routes>
       <Route path="/" element={<Login onLoginSuccess={() => setAuthenticated(true)} />} />
+
       <Route
         path="/inventory"
         element={
@@ -37,14 +39,24 @@ function Main() {
           </ProtectedRoute>
         }
       />
+      
       <Route 
-  path="/serials/:itemId" 
-  element={
-    <ProtectedRoute>
-      <SerialNumberPage />
-    </ProtectedRoute>
-  } 
-/>
+        path="/serials/:itemId" 
+          element={
+            <ProtectedRoute>
+              <SerialNumberPage />
+            </ProtectedRoute>
+          } 
+      />
+
+      <Route 
+        path="/team" 
+          element={
+            <ProtectedRoute>
+              <TeamPage />
+            </ProtectedRoute>
+          } 
+      />
 
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
