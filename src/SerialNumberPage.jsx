@@ -1,7 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './SerialNumberPage.css';
-import Squares from './Squares';
+
+// Trigger redploy test
+
 const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 export default function SerialNumberPage() {
   const { itemId } = useParams();
