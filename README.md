@@ -18,7 +18,8 @@ A sleek, full-stack inventory management web app designed for real-time tracking
 ## 🚀 Live Demo
 
 👉 [mcainventory.netlify.app](https://mcainventory.netlify.app)  
-
+Username: admin1
+Password: COLAS363
 ---
 
 ## 🛠 Tech Stack
